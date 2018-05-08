@@ -20,13 +20,15 @@ public class Sky extends JavaPlugin {
 	
 	public boolean on;
 	
+	public ChatListener listener;
+	
 	@Override
 	public void onEnable() {
 		instance = this;
 		on = true;
-		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		getCommand("antispam").setExecutor(new AntispamCommand());
 		loadConfig();
+		Bukkit.getPluginManager().registerEvents(listener = new ChatListener(), this);
 	}
 	
 	
