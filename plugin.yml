@@ -1,0 +1,6 @@
+author: Myskdias
+version: 1.0.0
+name: AntiSpam
+main: com.myskdias.antispam.Sky
+commands:
+  antispam:

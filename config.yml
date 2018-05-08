@@ -1,0 +1,23 @@
+chat:
+  #Message envoyé au joueur lorsqu'il tente d'envoyer un message avant la fin du cooldown --> voir 'messageCooldown'
+  messageError: "&cVous devez attendre %i avant de poster un message"
+  #Message envoyé à l'ensemble des joueurs lorsque le mode antispam est activé (laisser '' si aucun message n'est voulu)
+  messageActivation: "&eAntiSpam activée (Vous devez attendre %i secondes entre chaque message)"
+  #Message envoyé à l'ensemble des joueurs lorsuqe le mode antispam est désactivé (laisser '' si aucun message n'est voulu)
+  messageDesactivation: "&eAntiSpam desactivé !"
+
+plugin:
+  messageLimite: 50
+  #in seconde
+  #temps durant lequel le joueur ne peut parler
+  messageCooldown: 5
+  #En seconde (300 = 5 minutes)
+  #temps durant le chat subit l'antispace
+  spamTime: 300
+  #antispam.* == allperm
+  #perm to bypass le plugin
+  permBypass: "antispam.bypass"
+  #perm to turn off/on l'antispam
+  permTurnOff: "antispam.turnoff"
+  #perm to modify the cooldown, spamtime and messageLimite
+  permModify: "antispam.modify"
