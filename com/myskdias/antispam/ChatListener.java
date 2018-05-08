@@ -22,17 +22,28 @@ public class ChatListener implements Listener {
 		sky = Sky.getInstance();
 		timeEnd = 0;
 		b = false;
-		chatTime = new ArrayList<>(sky.messageLimite);
+		chatTime = new ArrayList<>();
+		for(int i = 0; i < sky.messageLimite; i++) {
+			chatTime.add(-1L);
+		}
+	}
+	
+	public void rl() {
+		chatTime = new ArrayList<>();
+		for(int i = 0; i < sky.messageLimite; i++) {
+			chatTime.add(-1L);
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onChat(AsyncPlayerChatEvent e) {
+		if(!sky.on) return;
 		Player p = e.getPlayer();
 		if(p.hasPermission(sky.permBypass) || p.isOp()) {
 			return;
 		}
 		long timeMillis = System.currentTimeMillis();
-		//chat Limité
+		//chat LimitÃ©
 		if(timeMillis < timeEnd) {
 			Long l = cooldown.get(p.getName());
 			if(l == null) {
@@ -64,13 +75,16 @@ public class ChatListener implements Listener {
 	public void updateChatTime(long timeMillis) {
 		Long base = chatTime.remove(0);
 		chatTime.add(sky.messageLimite - 1, timeMillis);
+		
 		if(base != null) {
-			if(timeMillis - base < 60_000) {
-				timeEnd = timeMillis + sky.spamTime;
-				if(!b) {
-					b = true;
-					if(!sky.messageActivation.isEmpty())
-						Bukkit.broadcastMessage(sky.messageActivation.replace("&i", ""+(int)sky.messageCooldown / 1000));
+			if(base != -1) {
+				if(timeMillis - base < 60_000) {
+					timeEnd = timeMillis + sky.spamTime;
+					if(!b) {
+						b = true;
+						if(!sky.messageActivation.isEmpty())
+							Bukkit.broadcastMessage(sky.messageActivation.replace("%i", ""+(int)sky.messageCooldown / 1000));
+					}
 				}
 			}
 		}
