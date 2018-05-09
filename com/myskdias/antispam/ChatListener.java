@@ -39,7 +39,7 @@ public class ChatListener implements Listener {
 	public void onChat(AsyncPlayerChatEvent e) {
 		if(!sky.on) return;
 		Player p = e.getPlayer();
-		if(p.hasPermission(sky.permBypass) || p.isOp()) {
+		if(p.hasPermission(sky.permBypass) || p.hasPermission("antispam.*") || p.isOp()) {
 			return;
 		}
 		long timeMillis = System.currentTimeMillis();
@@ -54,7 +54,7 @@ public class ChatListener implements Listener {
 			if(timeMillis < l) {
 				e.setCancelled(true);
 				if(!sky.messageError.isEmpty()) {
-					p.sendMessage(sky.messageError.replace("%i", "" + (int) ((l - timeMillis)/1000)));
+					p.sendMessage(sky.messageError.replace("%i", "" + (int) (((l - timeMillis)/1000) + 1)));
 				}
 				return;
 			} else {
