@@ -18,9 +18,14 @@ public class AntispamCommand implements CommandExecutor {
 			if(sender.hasPermission(sky.permTurnOff) || sender.hasPermission("antispam.*") || sender.isOp()) {
 				if(sky.on) {
 					sky.on = false;
+					sky.listener.timeEnd = 0;
+					sky.config.set("plugin.activate",  false);
+					sky.saveConfig();
 					sender.sendMessage("§6L'antispam est désactivé");
 				} else {
 					sky.on = true;
+					sky.config.set("plugin.activate",  true);
+					sky.saveConfig();
 					sender.sendMessage("§6L'antispam est activé");
 				}
 				return false;
